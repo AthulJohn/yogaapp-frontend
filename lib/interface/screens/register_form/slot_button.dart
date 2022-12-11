@@ -45,7 +45,7 @@ class SlotButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(slotsTime[slot - 1] ?? "",
+            Text(slotsTime[slot] ?? "",
                 style: slot == 3
                     ? AppTextStyles.radioTextSelected
                     : AppTextStyles.radioText),

@@ -27,6 +27,7 @@ class _SlotRadioButtonsState extends State<SlotRadioButtons> {
   Widget build(BuildContext context) {
     return FutureBuilder<List<int>>(
         future: checkSlots(),
+        initialData: const [-1, -1, -1, -1],
         builder: (context, snap) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,6 +40,7 @@ class _SlotRadioButtonsState extends State<SlotRadioButtons> {
                   Expanded(
                     child: SlotButton(
                       1,
+                      selected: slot == 1,
                       onChanged: () {
                         setState(() {
                           slot = 1;
@@ -52,6 +54,7 @@ class _SlotRadioButtonsState extends State<SlotRadioButtons> {
                   Expanded(
                     child: SlotButton(
                       2,
+                      selected: slot == 2,
                       onChanged: () {
                         setState(() {
                           slot = 2;
@@ -69,6 +72,7 @@ class _SlotRadioButtonsState extends State<SlotRadioButtons> {
                   Expanded(
                     child: SlotButton(
                       3,
+                      selected: slot == 3,
                       onChanged: () {
                         setState(() {
                           slot = 3;
@@ -82,6 +86,7 @@ class _SlotRadioButtonsState extends State<SlotRadioButtons> {
                   Expanded(
                     child: SlotButton(
                       4,
+                      selected: slot == 4,
                       onChanged: () {
                         setState(() {
                           slot = 4;

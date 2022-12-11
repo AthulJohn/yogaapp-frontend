@@ -73,7 +73,13 @@ class _PaymentTileState extends State<PaymentTile> {
                 //If the image is null, show the icon, else show the image
                 leading: widget.image == null
                     ? widget.icon
-                    : SizedBox(width: 50, child: Image.network(widget.image!)),
+                    : SizedBox(
+                        width: 50,
+                        child: Image.network(
+                          widget.image!,
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Text("UPI"),
+                        )),
                 onTap: () async {
                   setState(() {
                     logging = true;

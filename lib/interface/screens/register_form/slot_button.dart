@@ -8,8 +8,12 @@ import '../../../constants/text_styles.dart';
 ///Used in the SlotRadioButtons widget
 class SlotButton extends StatelessWidget {
   const SlotButton(this.slot,
-      {required this.onChanged, required this.slotCount, super.key});
+      {required this.onChanged,
+      required this.slotCount,
+      this.selected = false,
+      super.key});
   final int slot, slotCount;
+  final bool selected;
   final Function()? onChanged;
 
   ///Returns an indication color, based on the number of slots available
@@ -37,8 +41,8 @@ class SlotButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
-              color: slot == 3 ? AppColors.buttonColor : Colors.grey,
-              width: slot == 3 ? 4 : 2),
+              color: selected ? AppColors.buttonColor : Colors.grey,
+              width: selected ? 4 : 2),
           borderRadius: BorderRadius.circular(5),
         ),
         padding: const EdgeInsets.all(10),
@@ -46,7 +50,7 @@ class SlotButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(slotsTime[slot] ?? "",
-                style: slot == 3
+                style: selected
                     ? AppTextStyles.radioTextSelected
                     : AppTextStyles.radioText),
             if (slotCount > -1)

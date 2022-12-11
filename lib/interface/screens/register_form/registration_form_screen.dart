@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:yoga_frontend/interface/components/arc_background.dart';
 import 'package:yoga_frontend/interface/screens/register_form/slot_radio_buttons.dart';
 
@@ -157,6 +158,16 @@ class _RegisterBodyState extends State<RegisterBody> {
                           ));
                         }, onSuccess: (id) {
                           if (!mounted) return;
+                          Provider.of<Person>(context, listen: false).setPerson(
+                              Person(
+                                  age: age,
+                                  name: name,
+                                  phone: phone,
+                                  slot: slot,
+                                  changedslot: slot,
+                                  feePaidMonth: null,
+                                  id: id,
+                                  registerDate: DateTime.now()));
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

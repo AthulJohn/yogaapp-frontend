@@ -14,7 +14,7 @@ Future<int> registerPerson(Person p) async {
       Response response = await post(uri,
           headers: {
             "Accept": "application/json",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
           body: jsonEncode(p.toJson()));
       if (response.statusCode == 200) {

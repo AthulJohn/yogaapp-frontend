@@ -21,7 +21,9 @@ class MyApp extends StatelessWidget {
         create: (context) => Person.empty(),
         child: MaterialApp(
           title: 'Yoga App',
-          theme: ThemeData(),
+          theme: ThemeData(
+            fontFamily: 'Poppins',
+          ),
           home: const HomePage(),
         ));
   }

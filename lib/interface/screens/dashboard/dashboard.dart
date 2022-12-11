@@ -11,7 +11,6 @@ import '../../../constants/values.dart';
 import '../../../models/person_model.dart';
 import '../../../services/change_slot.dart';
 import '../../components/buttons.dart';
-import '../register_form/registration_form_screen.dart';
 
 ///The [Dashboard] is the screen that is used to show the user's dashboard
 ///Shown after the user is authenticated
@@ -154,12 +153,7 @@ class _DashboardBodyState extends State<DashboardBody>
 
             //Withdraw from the class button, currently not implemented
             AppElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: ((context) => const RegisterPage())));
-              },
+              onPressed: () {},
               text: "Withdraw from the class",
             ),
           ]);

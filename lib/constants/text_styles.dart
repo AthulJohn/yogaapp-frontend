@@ -10,7 +10,7 @@ abstract class AppTextStyles {
   static const TextStyle subheading = TextStyle(
     fontSize: 15,
     color: Colors.white,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w400,
   );
   static const TextStyle hintStyle = TextStyle(
     fontSize: 15,

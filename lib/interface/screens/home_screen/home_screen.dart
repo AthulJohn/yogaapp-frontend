@@ -24,27 +24,32 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      AppElevatedButton(
-        onPressed: () {},
-        text: "Know more about the class",
-      ),
-      AppElevatedButton(
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: ((context) => const RegisterPage())));
-        },
-        text: "Register for the class",
-      ),
-      AppElevatedButton(
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: ((context) => const AuthorizePage())));
-        },
-        text: "Student Dashboard",
-      ),
-      Container(),
-      Container(),
-    ]);
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          AppElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => const RegisterPage())));
+            },
+            text: "New Registration",
+          ),
+          AppElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => const AuthorizePage())));
+            },
+            text: "Student Dashboard",
+          ),
+          AppOutlinedButton(
+            onPressed: () {},
+            text: "Know more about the class",
+          ),
+        ]);
   }
 }

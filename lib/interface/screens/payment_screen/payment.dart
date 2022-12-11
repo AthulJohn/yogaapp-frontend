@@ -35,9 +35,41 @@ class PaymentsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      Text(
-          "You need to pay Rs.500 as the fees for the month of ${months[DateTime.now().month - 1]} to complete your registration."),
-      Text("Select your Payment Option"),
+      RichText(
+        text: TextSpan(
+          children: [
+            const TextSpan(
+                text: "Your Registration Id is ",
+                style: TextStyle(color: Colors.black)),
+            TextSpan(
+                text: "$id",
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Colors.black)),
+          ],
+        ),
+      ),
+      RichText(
+        text: TextSpan(
+            style: TextStyle(
+                fontStyle: FontStyle.italic, fontSize: 14, color: Colors.black),
+            children: [
+              const TextSpan(text: "You need to pay "),
+              const TextSpan(
+                text: "Rs.500",
+                style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16),
+              ),
+              TextSpan(
+                  text:
+                      " as the fees for the month of ${months[DateTime.now().month - 1]} to complete your registration."),
+            ]),
+        textAlign: TextAlign.center,
+      ),
+      const Text("Select your Payment Option"),
       PaymentTile(
         text: "Pay via UPI",
         id: id,
@@ -47,12 +79,12 @@ class PaymentsBody extends StatelessWidget {
       PaymentTile(
         text: "Pay via Netbanking",
         id: id,
-        icon: Icon(Icons.mouse_rounded),
+        icon: const Icon(Icons.mouse_rounded),
       ),
       PaymentTile(
         text: "Pay using Debit/Credit Card",
         id: id,
-        icon: Icon(Icons.credit_card),
+        icon: const Icon(Icons.credit_card),
       ),
       Container(),
       Container(),

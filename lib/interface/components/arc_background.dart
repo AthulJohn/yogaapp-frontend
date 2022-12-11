@@ -47,15 +47,17 @@ class ArcBackground extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(),
-                              Text(
-                                heading,
-                                style: AppTextStyles.heading,
-                              ),
-                              if (subheading.isNotEmpty)
+                              Column(children: [
                                 Text(
                                   heading,
-                                  style: AppTextStyles.subheading,
+                                  style: AppTextStyles.heading,
                                 ),
+                                if (subheading.isNotEmpty)
+                                  Text(
+                                    subheading,
+                                    style: AppTextStyles.subheading,
+                                  ),
+                              ])
                             ],
                           ),
                         ),

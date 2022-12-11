@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yoga_frontend/constants/colors.dart';
 import 'package:yoga_frontend/interface/screens/register_form/registration_form_screen.dart';
 import 'package:yoga_frontend/models/person_model.dart';
 
@@ -22,6 +23,7 @@ class _PaymentTileState extends State<PaymentTile> {
 
   void payFees({VoidCallback? onSuccess, VoidCallback? onFailure}) async {
     bool result = await completePayment(widget.id);
+    await Future.delayed(Duration(seconds: 3));
     if (!result) {
       onFailure!.call();
     } else {
@@ -45,33 +47,40 @@ class _PaymentTileState extends State<PaymentTile> {
               )
             ],
           )
-        : ListTile(
-            title: Text(widget.text),
-            leading: widget.image == null
-                ? widget.icon
-                : Image.network(widget.image!),
-            onTap: () async {
-              payFees(
-                onFailure: () {
-                  if (!mounted) return;
-                  setState(() {
-                    logging = false;
-                  });
+        : Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: AppColors.buttonColor, width: 2),
+            ),
+            child: ListTile(
+                title: Text(widget.text),
+                leading: widget.image == null
+                    ? widget.icon
+                    : SizedBox(width: 50, child: Image.network(widget.image!)),
+                onTap: () async {
+                  payFees(
+                    onFailure: () {
+                      if (!mounted) return;
+                      setState(() {
+                        logging = false;
+                      });
 
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text(
-                      'An Error Occured',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    backgroundColor: Colors.red,
-                  ));
-                },
-                onSuccess: () {
-                  if (!mounted) return;
-                  Provider.of<Person>(context, listen: false).payFees();
-                  Navigator.pop(context);
-                },
-              );
-            });
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text(
+                          'An Error Occured',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.red,
+                      ));
+                    },
+                    onSuccess: () {
+                      if (!mounted) return;
+                      Provider.of<Person>(context, listen: false).payFees();
+                      Navigator.pop(context);
+                    },
+                  );
+                }),
+          );
   }
 }

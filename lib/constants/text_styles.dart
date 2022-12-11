@@ -19,6 +19,8 @@ abstract class AppTextStyles {
   );
 
   static const TextStyle radioText = TextStyle(fontSize: 18);
+  static TextStyle radioTextSelected = TextStyle(
+      fontSize: 18, color: AppColors.buttonColor, fontWeight: FontWeight.bold);
 
   static const TextStyle mini = TextStyle(
     fontSize: 13,
@@ -37,4 +39,7 @@ abstract class AppTextStyles {
       TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
   static TextStyle textButtonStyle = TextStyle(
       fontWeight: FontWeight.w900, fontSize: 15, color: AppColors.buttonColor);
+
+  static TextStyle strongStyle = TextStyle(
+      fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.buttonColor);
 }

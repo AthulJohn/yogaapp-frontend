@@ -21,6 +21,7 @@ Future<Person?> authorize(String id, String phone) async {
       print(response.body);
       if (response.statusCode == 200) {
         Map<String, dynamic> m = jsonDecode(response.body);
+        print(m["lastFeePaidMonth"]);
         return Person.fromJson(m);
       }
       return null;

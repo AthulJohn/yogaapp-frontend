@@ -39,6 +39,7 @@ class Person extends ChangeNotifier {
         );
 
   void setPerson(Person p) {
+    print(p.feePaidMonth);
     name = p.name;
     phone = p.phone;
     slot = p.slot;
@@ -47,20 +48,19 @@ class Person extends ChangeNotifier {
     changedslot = p.changedslot;
     feePaidMonth = p.feePaidMonth;
     registerDate = p.registerDate;
+    print(feePaidMonth);
     notifyListeners();
   }
 
   void changeSlot(int val) {
     changedslot = val;
+    print(changedslot);
     notifyListeners();
   }
 
   void payFees() {
-    if (feePaidMonth == null) {
-      feePaidMonth = DateTime.now();
-    } else {
-      feePaidMonth = feePaidMonth!.add(Duration(days: 31));
-    }
+    feePaidMonth = DateTime.now();
+    notifyListeners();
   }
 
   Map<String, dynamic> toJson() {
@@ -85,6 +85,23 @@ class Person extends ChangeNotifier {
     }
   }
 
+  int get getDueMonths {
+    int no = 0;
+    if (feePaidMonth == null) {
+      if (registerDate == null) return 1;
+      no = (DateTime.now().year - registerDate!.year) * 12;
+      no += (DateTime.now().month - registerDate!.month + 1);
+      return no;
+    }
+    if (feePaidMonth!.month == DateTime.now().month) {
+      return 0;
+    } else {
+      no = (DateTime.now().year - feePaidMonth!.year) * 12;
+      no += (DateTime.now().month - feePaidMonth!.month);
+      return no;
+    }
+  }
+
   String get getBeutifiedFeesStatus {
     if (feePaidMonth == null) {
       return "Registration Fees not Paid";
@@ -92,7 +109,7 @@ class Person extends ChangeNotifier {
     if (feePaidMonth!.month == DateTime.now().month) {
       return "No Fees Due (Paid)";
     } else {
-      return "Fees Due from ${months[feePaidMonth!.month - 1]}]}";
+      return "Fees Due from ${months[feePaidMonth!.month - 1]}";
     }
   }
 }

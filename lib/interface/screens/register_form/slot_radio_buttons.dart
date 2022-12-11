@@ -27,74 +27,107 @@ class _SlotRadioButtonsState extends State<SlotRadioButtons> {
         Row(
           children: [
             Expanded(
-              child: Row(children: [
-                Radio(
-                  activeColor: AppColors.buttonColor,
-                  value: 1,
-                  groupValue: slot,
-                  onChanged: (val) {
-                    setState(() {
-                      slot = 1;
-                    });
-                    widget.onChanged?.call(1);
-                  },
+              child: InkWell(
+                splashColor: AppColors.buttonColor,
+                onTap: () {
+                  setState(() {
+                    slot = 1;
+                  });
+                  widget.onChanged?.call(1);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: slot == 1 ? AppColors.buttonColor : Colors.grey,
+                        width: slot == 1 ? 4 : 2),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  padding: EdgeInsets.all(10),
+                  child: Text("6 AM - 7 AM",
+                      style: slot == 1
+                          ? AppTextStyles.radioTextSelected
+                          : AppTextStyles.radioText),
                 ),
-                const Text("6 AM - 7 AM", style: AppTextStyles.radioText),
-              ]),
+              ),
             ),
+            SizedBox(width: 10),
             Expanded(
-              child: Row(children: [
-                Radio(
-                  activeColor: AppColors.buttonColor,
-                  value: 2,
-                  groupValue: slot,
-                  onChanged: (val) {
-                    setState(() {
-                      slot = 2;
-                    });
-                    widget.onChanged?.call(2);
-                  },
+              child: InkWell(
+                splashColor: AppColors.buttonColor,
+                onTap: () {
+                  setState(() {
+                    slot = 2;
+                  });
+                  widget.onChanged?.call(2);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: slot == 2 ? AppColors.buttonColor : Colors.grey,
+                        width: slot == 2 ? 4 : 2),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  padding: EdgeInsets.all(10),
+                  child: Text("7 AM - 8 AM",
+                      style: slot == 2
+                          ? AppTextStyles.radioTextSelected
+                          : AppTextStyles.radioText),
                 ),
-                const Text("7 AM - 8 AM", style: AppTextStyles.radioText),
-              ]),
-            )
+              ),
+            ),
           ],
         ),
+        SizedBox(height: 10),
         Row(
           children: [
             Expanded(
-              child: Row(children: [
-                Radio(
-                  activeColor: AppColors.buttonColor,
-                  value: 3,
-                  groupValue: slot,
-                  onChanged: (val) {
-                    setState(() {
-                      slot = 3;
-                    });
-                    widget.onChanged?.call(3);
-                  },
-                ),
-                const Text("8 AM - 9 AM", style: AppTextStyles.radioText),
-              ]
-                  // contentPadding: EdgeInsets.symmetric(horizontal: 5),
+              child: InkWell(
+                splashColor: AppColors.buttonColor,
+                onTap: () {
+                  setState(() {
+                    slot = 3;
+                  });
+                  widget.onChanged?.call(3);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: slot == 3 ? AppColors.buttonColor : Colors.grey,
+                        width: slot == 3 ? 4 : 2),
+                    borderRadius: BorderRadius.circular(5),
                   ),
+                  padding: EdgeInsets.all(10),
+                  child: Text("8 AM - 9 AM",
+                      style: slot == 3
+                          ? AppTextStyles.radioTextSelected
+                          : AppTextStyles.radioText),
+                ),
+              ),
             ),
+            SizedBox(width: 10),
             Expanded(
-              child: Row(children: [
-                Radio(
-                  activeColor: AppColors.buttonColor,
-                  value: 4,
-                  groupValue: slot,
-                  onChanged: (val) {
+              child: InkWell(
+                  splashColor: AppColors.buttonColor,
+                  onTap: () {
                     setState(() {
                       slot = 4;
                     });
                     widget.onChanged?.call(4);
                   },
-                ),
-                const Text("5 PM - 6 PM", style: AppTextStyles.radioText),
-              ]),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color:
+                              slot == 4 ? AppColors.buttonColor : Colors.grey,
+                          width: slot == 4 ? 4 : 2),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    padding: EdgeInsets.all(10),
+                    child: Text("5 PM - 6 PM",
+                        style: slot == 4
+                            ? AppTextStyles.radioTextSelected
+                            : AppTextStyles.radioText),
+                  )),
             )
           ],
         ),

@@ -15,22 +15,24 @@ import '../../components/text_fields.dart';
 import 'payment_tile.dart';
 
 class PaymentsPage extends StatelessWidget {
-  const PaymentsPage(this.id, {Key? key}) : super(key: key);
+  const PaymentsPage(this.id, {this.dueno = -1, Key? key}) : super(key: key);
   final int id;
+  final int dueno;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         // resizeToAvoidBottomInset: false,
         body: ArcBackground(
-      child: PaymentsBody(id),
+      child: PaymentsBody(id, dueno: dueno),
     ));
   }
 }
 
 class PaymentsBody extends StatelessWidget {
-  const PaymentsBody(this.id, {Key? key}) : super(key: key);
+  const PaymentsBody(this.id, {this.dueno = -1, Key? key}) : super(key: key);
   final int id;
+  final int dueno;
 
   @override
   Widget build(BuildContext context) {
@@ -50,25 +52,47 @@ class PaymentsBody extends StatelessWidget {
           ],
         ),
       ),
-      RichText(
-        text: TextSpan(
-            style: TextStyle(
-                fontStyle: FontStyle.italic, fontSize: 14, color: Colors.black),
-            children: [
-              const TextSpan(text: "You need to pay "),
-              const TextSpan(
-                text: "Rs.500",
-                style: TextStyle(
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16),
-              ),
-              TextSpan(
-                  text:
-                      " as the fees for the month of ${months[DateTime.now().month - 1]} to complete your registration."),
-            ]),
-        textAlign: TextAlign.center,
-      ),
+      dueno > -1
+          ? RichText(
+              text: TextSpan(
+                  style: const TextStyle(
+                      fontStyle: FontStyle.italic,
+                      fontSize: 14,
+                      color: Colors.black),
+                  children: [
+                    const TextSpan(text: "Your total fees amount:"),
+                    TextSpan(
+                      text: "Rs.${500 * dueno}",
+                      style: const TextStyle(
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    ),
+                    TextSpan(text: "(Fees due for last $dueno months)."),
+                  ]),
+              textAlign: TextAlign.center,
+            )
+          : RichText(
+              text: TextSpan(
+                  style: const TextStyle(
+                      fontStyle: FontStyle.italic,
+                      fontSize: 14,
+                      color: Colors.black),
+                  children: [
+                    const TextSpan(text: "You need to pay "),
+                    const TextSpan(
+                      text: "Rs.500",
+                      style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    ),
+                    TextSpan(
+                        text:
+                            " as the fees for the month of ${months[DateTime.now().month - 1]} to complete your registration."),
+                  ]),
+              textAlign: TextAlign.center,
+            ),
       const Text("Select your Payment Option"),
       PaymentTile(
         text: "Pay via UPI",

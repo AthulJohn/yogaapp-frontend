@@ -59,6 +59,9 @@ class _PaymentTileState extends State<PaymentTile> {
                     ? widget.icon
                     : SizedBox(width: 50, child: Image.network(widget.image!)),
                 onTap: () async {
+                  setState(() {
+                    logging = true;
+                  });
                   payFees(
                     onFailure: () {
                       if (!mounted) return;
@@ -76,6 +79,13 @@ class _PaymentTileState extends State<PaymentTile> {
                     },
                     onSuccess: () {
                       if (!mounted) return;
+                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text(
+                          'Payment Successful',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.green,
+                      ));
                       Provider.of<Person>(context, listen: false).payFees();
                       Navigator.pop(context);
                     },

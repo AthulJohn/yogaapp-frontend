@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:yoga_frontend/constants/colors.dart';
 import 'package:yoga_frontend/interface/components/arc_background.dart';
+import 'package:yoga_frontend/interface/components/academy_logo.dart';
 import 'package:yoga_frontend/interface/screens/user_auth_screen/auth_screen.dart';
 import '../../components/buttons.dart';
+import '../know_more_page/know_more.dart';
 import '../register_form/registration_form_screen.dart';
 
 class HomePage extends StatelessWidget {
@@ -28,6 +31,7 @@ class HomeBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          AcademyLogo(),
           AppElevatedButton(
             onPressed: () {
               Navigator.push(
@@ -47,7 +51,12 @@ class HomeBody extends StatelessWidget {
             text: "Student Dashboard",
           ),
           AppOutlinedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => const KnowMorePage())));
+            },
             text: "Know more about the class",
           ),
         ]);

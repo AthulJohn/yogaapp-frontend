@@ -78,7 +78,7 @@ class _AuthorizeBodyState extends State<AuthorizeBody> {
           ? Row(
               children: const [
                 Text(
-                  'Signing Up...  ',
+                  'Authorizing...  ',
                   style: AppTextStyles.body,
                 ),
                 CircularProgressIndicator(
@@ -110,7 +110,7 @@ class _AuthorizeBodyState extends State<AuthorizeBody> {
                       if (!mounted) return;
                       Provider.of<Person>(context, listen: false)
                           .setPerson(pers);
-                      Navigator.push(context,
+                      Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) => Dashboard()));
                     });
                   },

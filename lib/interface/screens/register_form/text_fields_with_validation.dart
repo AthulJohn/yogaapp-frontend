@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../components/text_fields.dart';
 
+///[AgeField] is a custom widget that is used to input and validate the age of the user
+///Used in the registration form
 class AgeField extends StatefulWidget {
   final Function(int)? onChanged;
-  AgeField({this.onChanged, Key? key}) : super(key: key);
+  const AgeField({this.onChanged, Key? key}) : super(key: key);
 
   @override
   State<AgeField> createState() => _AgeFieldState();
@@ -37,9 +39,11 @@ class _AgeFieldState extends State<AgeField> {
   }
 }
 
+///The [PhoneField] is a custom widget that is used to input and validate the phone number
+///Used in the registration form
 class PhoneField extends StatefulWidget {
   final Function(String)? onChanged;
-  PhoneField({this.onChanged, Key? key}) : super(key: key);
+  const PhoneField({this.onChanged, Key? key}) : super(key: key);
 
   @override
   State<PhoneField> createState() => _PhoneFieldState();

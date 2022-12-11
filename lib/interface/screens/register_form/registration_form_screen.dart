@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoga_frontend/interface/components/arc_background.dart';
-// import 'package:yoga_frontend/interface/screens/register_form/proceed_to_pay_button.dart';
 import 'package:yoga_frontend/interface/screens/register_form/slot_radio_buttons.dart';
 
-import '../../../constants/colors.dart';
 import '../../../constants/text_styles.dart';
 import '../../../models/person_model.dart';
 import '../../../services/register.dart';
@@ -13,13 +10,14 @@ import '../../components/text_fields.dart';
 import '../payment_screen/payment.dart';
 import 'text_fields_with_validation.dart';
 
+///The [RegisterPage] is the screen that is used to register a new user
+///Shown when a user clicks register button from the home screen
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        // resizeToAvoidBottomInset: false,
+    return const Scaffold(
         body: ArcBackground(
       child: RegisterBody(),
     ));
@@ -27,7 +25,7 @@ class RegisterPage extends StatelessWidget {
 }
 
 class RegisterBody extends StatefulWidget {
-  RegisterBody({Key? key}) : super(key: key);
+  const RegisterBody({Key? key}) : super(key: key);
 
   @override
   State<RegisterBody> createState() => _RegisterBodyState();
@@ -35,10 +33,14 @@ class RegisterBody extends StatefulWidget {
 
 class _RegisterBodyState extends State<RegisterBody> {
   String name = '', phone = '';
-  bool logging = false;
   int age = 0, slot = 1;
 
+  ///  Used to toggle the spinner when the user is registering
+  bool logging = false;
+
+  ///This function separates the async code from the UI code
   void registerUser({Function(int)? onSuccess, VoidCallback? onFailure}) async {
+    // User Registration is done, on the Register page, even if the payment is not done, because Registration ID will be generated only after the registration in the backend
     int result = await registerPerson(
         Person(name: name, phone: phone, slot: slot, age: age));
     if (result == -1) {
@@ -51,12 +53,6 @@ class _RegisterBodyState extends State<RegisterBody> {
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      Text(
-        "Register for Yoga Classes here. You should be between 18 to 65 years old to be eligible for the class. You can choose any of the slots given below based in availability. You should pay the first month fees of Rs.500 to complete the registration.",
-        style: AppTextStyles.body,
-      ),
-      // Column(
-      // children: [
       AppTextField(
         hintText: 'Name',
         labelText: 'Name',
@@ -74,7 +70,7 @@ class _RegisterBodyState extends State<RegisterBody> {
               },
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Expanded(
             flex: 2,
             child: PhoneField(
@@ -86,16 +82,20 @@ class _RegisterBodyState extends State<RegisterBody> {
         ],
       ),
 
-      //TODO: Extract Radio Widget
       SlotRadioButtons(
         onChanged: (val) {
           slot = val;
         },
       ),
+      //Empty Containers adds some gap between the fields and the button, since the MainAxisAlignment is spaceEvenly
       Container(),
       Container(),
       logging
-          ? Row(
+          ?
+          //if [logging] is true, the async function is running and the spinner is shown
+          Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 Text(
                   'Signing Up...  ',
@@ -105,14 +105,14 @@ class _RegisterBodyState extends State<RegisterBody> {
                   color: Colors.black,
                 )
               ],
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
             )
           : Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 AppElevatedButton(
                     onPressed: () async {
+                      //age is set to -1, if the age is not valid
+                      //If the age is not valid, the age field will be show an error, and the user won't be able to proceed
                       if (age == -1) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
@@ -123,7 +123,10 @@ class _RegisterBodyState extends State<RegisterBody> {
                           backgroundColor: Colors.red,
                         ));
                         return;
-                      } else if (phone == 'X') {
+                      }
+                      //phone is set to "X", if it is not valid
+                      //the phone field will be show an error, and the user won't be able to proceed
+                      else if (phone == 'X') {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
                           content: Text(
@@ -134,6 +137,7 @@ class _RegisterBodyState extends State<RegisterBody> {
                         ));
                         return;
                       } else {
+                        //logging is set to true, to show the spinner
                         setState(() {
                           logging = true;
                         });

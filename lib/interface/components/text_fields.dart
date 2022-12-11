@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 import '../../constants/text_styles.dart';
 
+///The [AppTextField] is a custom widget that is used to display a customized text field
+///Used as a base for all the text fields used in the app
 class AppTextField extends StatelessWidget {
   final String? hintText, errorText, labelText;
   final Function(String) onChanged;
@@ -76,101 +78,3 @@ class AppTextField extends StatelessWidget {
     );
   }
 }
-
-class AppCalenderField extends StatelessWidget {
-  final String? hintText;
-  final Function(String) onChanged;
-  final bool isDob;
-  final TextEditingController tec;
-  const AppCalenderField(
-      {required this.onChanged,
-      this.hintText,
-      this.isDob = false,
-      required this.tec,
-      Key? key})
-      : super(key: key);
-  String dateToString(DateTime date) {
-    return '${date.year}-${date.month}-${date.day} ${date.hour}:${date.minute}';
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AppTextField(
-      onChanged: onChanged,
-      hintText: hintText,
-      tec: tec,
-      suffix: InkWell(
-        onTap: () async {
-          DateTime dt = await showDatePicker(
-                  context: context,
-                  initialDate: isDob ? DateTime(2000) : DateTime.now(),
-                  firstDate: DateTime(isDob ? 1910 : 2022),
-                  lastDate: DateTime(isDob ? 2030 : 2100)) ??
-              DateTime.now();
-          if (!isDob) {
-            TimeOfDay tm = await showTimePicker(
-                    context: context, initialTime: TimeOfDay.now()) ??
-                TimeOfDay.now();
-            dt = dt.add(Duration(hours: tm.hour, minutes: tm.minute));
-          }
-
-          if (isDob)
-            tec.text = '${dt.day}-${dt.month}-${dt.year}';
-          else
-            tec.text = dateToString(dt);
-          ;
-          onChanged(tec.text);
-        },
-        child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0),
-          child: Icon(Icons.calendar_today),
-        ),
-      ),
-    );
-  }
-}
-
-// class AppPasswordField extends StatefulWidget {
-//   final String? hintText;
-//   final Function(String) onChanged;
-//   const AppPasswordField({required this.onChanged, this.hintText, Key? key})
-//       : super(key: key);
-
-//   @override
-//   State<AppPasswordField> createState() => _AppPasswordFieldState();
-// }
-
-// class _AppPasswordFieldState extends State<AppPasswordField> {
-//   bool textVisible = false;
-//   TextEditingController tec = TextEditingController();
-//   @override
-//   Widget build(BuildContext context) {
-//     return AppTextField(
-//       onChanged: widget.onChanged,
-//       hintText: widget.hintText,
-//       suffix: AnimatedIconButton(
-//         onPressed: () {
-//           setState(() {
-//             textVisible = !textVisible;
-//           });
-//         },
-//         icons: const [
-//           AnimatedIconItem(
-//             icon: Icon(
-//               Icons.visibility_outlined,
-//               color: Colors.black54,
-//             ),
-//           ),
-//           AnimatedIconItem(
-//             icon: Icon(
-//               Icons.visibility_off_outlined,
-//               color: Colors.black54,
-//             ),
-//           ),
-//         ],
-//         size: 20,
-//       ),
-//       obscureText: !textVisible,
-//     );
-//   }
-// }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './colors.dart';
 
+///The [AppTextStyles] is a class that contains various text styles used in the app
 abstract class AppTextStyles {
   static const TextStyle heading = TextStyle(
     fontSize: 24,

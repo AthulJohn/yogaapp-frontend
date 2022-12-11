@@ -1,28 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoga_frontend/interface/components/arc_background.dart';
-import 'package:yoga_frontend/interface/screens/register_form/proceed_to_pay_button.dart';
-import 'package:yoga_frontend/interface/screens/register_form/slot_radio_buttons.dart';
-import 'package:yoga_frontend/services/complete_payment.dart';
 
-import '../../../constants/colors.dart';
-import '../../../constants/text_styles.dart';
 import '../../../constants/values.dart';
-import '../../../models/person_model.dart';
-import '../../../services/register.dart';
-import '../../components/buttons.dart';
-import '../../components/text_fields.dart';
 import 'payment_tile.dart';
 
+///The [PaymentsPage] is the screen that is used to show the payment options
+///Shown when a user clicks the payment button from the register screen or the user dashboard
 class PaymentsPage extends StatelessWidget {
   const PaymentsPage(this.id, {this.dueno = -1, Key? key}) : super(key: key);
   final int id;
+
+  ///dueNo is the number of months the user has not paid the fees for.
+  ///Will be -1, if the user is redirected from the Register Screen
   final int dueno;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // resizeToAvoidBottomInset: false,
         body: ArcBackground(
       child: PaymentsBody(id, dueno: dueno),
     ));
@@ -52,6 +46,9 @@ class PaymentsBody extends StatelessWidget {
           ],
         ),
       ),
+
+      //Different Messages are shown, depending on whether the user is redirected from the Register Screen or the User Dashboard
+      //If the user is redirected from the Register Screen, then the user has to pay the fees as a registration fees
       dueno > -1
           ? RichText(
               text: TextSpan(
@@ -62,6 +59,7 @@ class PaymentsBody extends StatelessWidget {
                   children: [
                     const TextSpan(text: "Your total fees amount:"),
                     TextSpan(
+                      //The total fees amount is calculated by multiplying the fees for each month by the number of months the user has not paid the fees for
                       text: "Rs.${500 * dueno}",
                       style: const TextStyle(
                           fontStyle: FontStyle.italic,
@@ -94,21 +92,25 @@ class PaymentsBody extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
       const Text("Select your Payment Option"),
+      //Different Payment Options are shown, Butall the methods does the same thing, i.e. calls the completePayment Function in the backend
       PaymentTile(
         text: "Pay via UPI",
         id: id,
         image:
             "https://resize.indiatvnews.com/en/resize/newbucket/715_-/2017/11/upi-1509594508.jpg",
+        fromdashboard: dueno != -1,
       ),
       PaymentTile(
         text: "Pay via Netbanking",
         id: id,
         icon: const Icon(Icons.mouse_rounded),
+        fromdashboard: dueno != -1,
       ),
       PaymentTile(
         text: "Pay using Debit/Credit Card",
         id: id,
         icon: const Icon(Icons.credit_card),
+        fromdashboard: dueno != -1,
       ),
       Container(),
       Container(),

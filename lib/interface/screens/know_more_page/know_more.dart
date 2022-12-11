@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yoga_frontend/constants/colors.dart';
 import 'package:yoga_frontend/interface/components/arc_background.dart';
-import 'package:yoga_frontend/interface/screens/user_auth_screen/auth_screen.dart';
-import '../../components/buttons.dart';
-import '../register_form/registration_form_screen.dart';
 
+///The [KnowMorePage] is the screen that is used to show the details about the class
 class KnowMorePage extends StatelessWidget {
   const KnowMorePage({Key? key}) : super(key: key);
 
@@ -48,6 +45,12 @@ class KnowMoreBody extends StatelessWidget {
           ),
           const Text(
             "Niravana is one of the best spot to practise Yoga. We train Yoga on all weekends, with flexibe time.",
+            style: TextStyle(
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+          const Text(
+            "Training is available for People between 18 to 65 Years Age.",
             style: TextStyle(
               fontStyle: FontStyle.italic,
             ),

@@ -5,6 +5,8 @@ import 'package:http/http.dart';
 import '../constants/values.dart';
 import '../models/person_model.dart';
 
+///Used to register a new user.
+///Returns the user's ID if successful, -1 otherwise.
 Future<int> registerPerson(Person p) async {
   Uri? uri = Uri.tryParse("$url/register");
   try {

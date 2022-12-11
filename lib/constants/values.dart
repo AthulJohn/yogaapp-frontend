@@ -1,3 +1,5 @@
+// This file contains some constant values used thorughout the app
+
 const String url = "https://yoga-api.onrender.com";
 
 const Map<int, String> slotsTime = {

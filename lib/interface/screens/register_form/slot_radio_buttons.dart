@@ -38,7 +38,7 @@ class _SlotRadioButtonsState extends State<SlotRadioButtons> {
                 children: [
                   Expanded(
                     child: SlotButton(
-                      slot,
+                      1,
                       onChanged: () {
                         setState(() {
                           slot = 1;
@@ -51,7 +51,7 @@ class _SlotRadioButtonsState extends State<SlotRadioButtons> {
                   const SizedBox(width: 10),
                   Expanded(
                     child: SlotButton(
-                      slot,
+                      2,
                       onChanged: () {
                         setState(() {
                           slot = 2;
@@ -68,7 +68,7 @@ class _SlotRadioButtonsState extends State<SlotRadioButtons> {
                 children: [
                   Expanded(
                     child: SlotButton(
-                      slot,
+                      3,
                       onChanged: () {
                         setState(() {
                           slot = 3;
@@ -81,7 +81,7 @@ class _SlotRadioButtonsState extends State<SlotRadioButtons> {
                   const SizedBox(width: 10),
                   Expanded(
                     child: SlotButton(
-                      slot,
+                      4,
                       onChanged: () {
                         setState(() {
                           slot = 4;

@@ -17,6 +17,7 @@ Future<int> registerPerson(Person p) async {
             "Content-Type": "application/json",
           },
           body: jsonEncode(p.toJson()));
+      print(response.body);
       if (response.statusCode == 200) {
         Map m = jsonDecode(response.body);
         return m['id'];

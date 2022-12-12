@@ -13,6 +13,7 @@ class PaymentTile extends StatefulWidget {
       {required this.id,
       required this.text,
       this.image,
+      this.amount = 500,
       this.fromdashboard = false,
       this.icon,
       super.key});
@@ -25,6 +26,7 @@ class PaymentTile extends StatefulWidget {
   ///Image is passed only in the case of Netbanking/Card Payment, and in that case, image will be null
   final Icon? icon;
   final bool fromdashboard;
+  final double amount;
   @override
   State<PaymentTile> createState() => _PaymentTileState();
 }
@@ -35,7 +37,7 @@ class _PaymentTileState extends State<PaymentTile> {
 
   ///This function separates the async code from the UI code
   void payFees({VoidCallback? onSuccess, VoidCallback? onFailure}) async {
-    bool result = await completePayment(widget.id);
+    bool result = await completePayment(widget.id, widget.text, widget.amount);
     // A delay is added, to emulate real world payment processing
     await Future.delayed(const Duration(seconds: 3));
     if (!result) {
@@ -69,7 +71,7 @@ class _PaymentTileState extends State<PaymentTile> {
               border: Border.all(color: AppColors.buttonColor, width: 2),
             ),
             child: ListTile(
-                title: Text(widget.text),
+                title: Text("Pay ${widget.text}"),
                 //If the image is null, show the icon, else show the image
                 leading: widget.image == null
                     ? widget.icon

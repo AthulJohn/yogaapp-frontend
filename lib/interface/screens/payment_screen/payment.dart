@@ -99,23 +99,26 @@ class PaymentsBody extends StatelessWidget {
       const Text("Select your Payment Option"),
       //Different Payment Options are shown, Butall the methods does the same thing, i.e. calls the completePayment Function in the backend
       PaymentTile(
-        text: "Pay via UPI",
+        text: "via UPI",
         id: Provider.of<Person>(context).id,
         image:
             "https://resize.indiatvnews.com/en/resize/newbucket/715_-/2017/11/upi-1509594508.jpg",
         fromdashboard: fromDashboard,
+        amount: 500.0 * Provider.of<Person>(context).getDueMonths,
       ),
       PaymentTile(
-        text: "Pay via Netbanking",
+        text: "via Netbanking",
         id: Provider.of<Person>(context).id,
         icon: const Icon(Icons.mouse_rounded),
         fromdashboard: fromDashboard,
+        amount: 500.0 * Provider.of<Person>(context).getDueMonths,
       ),
       PaymentTile(
-        text: "Pay using Debit/Credit Card",
+        text: "using Debit/Credit Card",
         id: Provider.of<Person>(context).id,
         icon: const Icon(Icons.credit_card),
         fromdashboard: fromDashboard,
+        amount: 500.0 * Provider.of<Person>(context).getDueMonths,
       ),
       Container(),
       Container(),

@@ -37,10 +37,7 @@ class HomeBody extends StatelessWidget {
           //New Registration Button
           AppElevatedButton(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: ((context) => const RegisterPage())));
+              Navigator.pushNamed(context, '/register');
             },
             text: "New Registration",
           ),
@@ -48,10 +45,7 @@ class HomeBody extends StatelessWidget {
           //Student Dashboard Button
           AppElevatedButton(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: ((context) => const AuthorizePage())));
+              Navigator.pushNamed(context, '/auth');
             },
             text: "Student Dashboard",
           ),
@@ -59,10 +53,7 @@ class HomeBody extends StatelessWidget {
           //Know More Button
           AppOutlinedButton(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: ((context) => const KnowMorePage())));
+              Navigator.pushNamed(context, '/knowmore');
             },
             text: "Know more about the class",
           ),

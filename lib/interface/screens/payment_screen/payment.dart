@@ -1,32 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:yoga_frontend/interface/components/arc_background.dart';
 
 import '../../../constants/values.dart';
+import '../../../models/person_model.dart';
 import 'payment_tile.dart';
 
 ///The [PaymentsPage] is the screen that is used to show the payment options
 ///Shown when a user clicks the payment button from the register screen or the user dashboard
 class PaymentsPage extends StatelessWidget {
-  const PaymentsPage(this.id, {this.dueno = -1, Key? key}) : super(key: key);
-  final int id;
+  const PaymentsPage({Key? key}) : super(key: key);
 
   ///dueNo is the number of months the user has not paid the fees for.
   ///Will be -1, if the user is redirected from the Register Screen
-  final int dueno;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: ArcBackground(
-      child: PaymentsBody(id, dueno: dueno),
+      child: PaymentsBody(
+          fromDashboard:
+              //true argument will be passed from dashboard while calling payments screen
+              ((ModalRoute.of(context)!.settings.arguments) ?? false) as bool),
     ));
   }
 }
 
 class PaymentsBody extends StatelessWidget {
-  const PaymentsBody(this.id, {this.dueno = -1, Key? key}) : super(key: key);
-  final int id;
-  final int dueno;
+  const PaymentsBody({this.fromDashboard = false, Key? key}) : super(key: key);
+  final bool fromDashboard;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class PaymentsBody extends StatelessWidget {
                 text: "Your Registration Id is ",
                 style: TextStyle(color: Colors.black)),
             TextSpan(
-                text: "$id",
+                text: "${Provider.of<Person>(context).id}",
                 style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -49,7 +51,7 @@ class PaymentsBody extends StatelessWidget {
 
       //Different Messages are shown, depending on whether the user is redirected from the Register Screen or the User Dashboard
       //If the user is redirected from the Register Screen, then the user has to pay the fees as a registration fees
-      dueno > -1
+      fromDashboard
           ? RichText(
               text: TextSpan(
                   style: const TextStyle(
@@ -60,13 +62,16 @@ class PaymentsBody extends StatelessWidget {
                     const TextSpan(text: "Your total fees amount:"),
                     TextSpan(
                       //The total fees amount is calculated by multiplying the fees for each month by the number of months the user has not paid the fees for
-                      text: "Rs.${500 * dueno}",
+                      text:
+                          "Rs.${500 * Provider.of<Person>(context).getDueMonths}",
                       style: const TextStyle(
                           fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.bold,
                           fontSize: 16),
                     ),
-                    TextSpan(text: "(Fees due for last $dueno months)."),
+                    TextSpan(
+                        text:
+                            "(Fees due for last ${Provider.of<Person>(context).getDueMonths} months)."),
                   ]),
               textAlign: TextAlign.center,
             )
@@ -95,22 +100,22 @@ class PaymentsBody extends StatelessWidget {
       //Different Payment Options are shown, Butall the methods does the same thing, i.e. calls the completePayment Function in the backend
       PaymentTile(
         text: "Pay via UPI",
-        id: id,
+        id: Provider.of<Person>(context).id,
         image:
             "https://resize.indiatvnews.com/en/resize/newbucket/715_-/2017/11/upi-1509594508.jpg",
-        fromdashboard: dueno != -1,
+        fromdashboard: fromDashboard,
       ),
       PaymentTile(
         text: "Pay via Netbanking",
-        id: id,
+        id: Provider.of<Person>(context).id,
         icon: const Icon(Icons.mouse_rounded),
-        fromdashboard: dueno != -1,
+        fromdashboard: fromDashboard,
       ),
       PaymentTile(
         text: "Pay using Debit/Credit Card",
-        id: id,
+        id: Provider.of<Person>(context).id,
         icon: const Icon(Icons.credit_card),
-        fromdashboard: dueno != -1,
+        fromdashboard: fromDashboard,
       ),
       Container(),
       Container(),

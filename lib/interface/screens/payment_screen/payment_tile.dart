@@ -115,10 +115,7 @@ class _PaymentTileState extends State<PaymentTile> {
                       } else {
                         //If the user is paying from the payment screen, Go to the dashboard
                         //Else, The user will need to authenticate again
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Dashboard()));
+                        Navigator.pushReplacementNamed(context, '/dashboard');
                       }
                     },
                   );

@@ -168,10 +168,7 @@ class _RegisterBodyState extends State<RegisterBody> {
                                   feePaidMonth: null,
                                   id: id,
                                   registerDate: DateTime.now()));
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PaymentsPage(id)));
+                          Navigator.pushReplacementNamed(context, '/payment');
                         });
                       }
                     },

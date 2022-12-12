@@ -139,11 +139,8 @@ class _DashboardBodyState extends State<DashboardBody>
                   if (person.getFeesStatus != "P")
                     AppElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) => PaymentsPage(person.id,
-                                    dueno: person.getDueMonths))));
+                        Navigator.pushReplacementNamed(context, '/payment',
+                            arguments: true);
                       },
                       text: "Pay Fees",
                     ),

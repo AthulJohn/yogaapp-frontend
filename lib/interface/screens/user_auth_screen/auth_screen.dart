@@ -109,10 +109,7 @@ class _AuthorizeBodyState extends State<AuthorizeBody> {
                       if (!mounted) return;
                       Provider.of<Person>(context, listen: false)
                           .setPerson(pers);
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Dashboard()));
+                      Navigator.pushReplacementNamed(context, '/dashboard');
                     });
                   },
                   text: 'AUTHORIZE'),

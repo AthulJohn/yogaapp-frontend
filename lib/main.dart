@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yoga_frontend/interface/screens/dashboard/dashboard.dart';
 import 'package:yoga_frontend/interface/screens/home_screen/home_screen.dart';
+import 'package:yoga_frontend/interface/screens/register_form/registration_form_screen.dart';
+import 'package:yoga_frontend/interface/screens/user_auth_screen/auth_screen.dart';
 
+import 'interface/screens/know_more_page/know_more.dart';
+import 'interface/screens/payment_screen/payment.dart';
 import 'models/person_model.dart';
 
 void main() {
@@ -24,7 +29,15 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: 'Poppins',
           ),
-          home: const HomePage(),
+          routes: {
+            '/': (context) => const HomePage(),
+            '/home': (context) => const HomePage(),
+            '/register': (context) => const RegisterPage(),
+            '/dashboard': (context) => const Dashboard(),
+            '/auth': (context) => const AuthorizePage(),
+            '/payment': (context) => const PaymentsPage(),
+            '/knowmore': (context) => const KnowMorePage(),
+          },
         ));
   }
 }
